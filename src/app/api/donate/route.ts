@@ -1,3 +1,5 @@
+
+
 import {
     ACTIONS_CORS_HEADERS,
     ActionGetResponse,
@@ -26,6 +28,7 @@ import {
       links: {
         actions: [
           {
+            type: "url",
             label: "Donate 0.1 SOL",
             href: `${url.href}?amount=0.1`,
           },
@@ -49,7 +52,7 @@ export async function POST(request: Request) {
 
   try {
     sender = new PublicKey(body.account);
-  } catch (error) {
+  } catch {
     return new Response(
       JSON.stringify({
         error: {
@@ -78,6 +81,7 @@ export async function POST(request: Request) {
 
   const payload: ActionPostResponse = await createPostResponse({
     fields: {
+      type: "transaction",
       transaction,
       message: "your enemies will die soon",
     },
